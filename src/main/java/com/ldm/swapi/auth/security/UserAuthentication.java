@@ -18,14 +18,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class UserAuthentication extends UsernamePasswordAuthenticationFilter {
 
-    private static final int TOKEN_EXPIRATE_AT = 600000;
+    private static final int TOKEN_EXPIRATE_AT = 6000000;
     public static final String SECRET = "9b6f34f4-dc81-46a0-9e35-a7561179efa7";
 
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager) {
+    public UserAuthentication(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 

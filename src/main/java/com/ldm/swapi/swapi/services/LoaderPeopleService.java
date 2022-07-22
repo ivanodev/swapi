@@ -8,5 +8,6 @@ import java.util.List;
 public interface LoaderPeopleService {
 
     List<PeopleDto> getAll() throws IllegalAccessException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, InstantiationException;
+
     PeopleDto getById(Number peopleId) throws NoSuchMethodException, NoSuchFieldException, InstantiationException, IllegalAccessException, InvocationTargetException;
 }

@@ -1,4 +1,4 @@
-package com.ldm.swapi.infra.apiconsumer;
+package com.ldm.swapi.apiconsumer;
 
 public enum DataType {
 

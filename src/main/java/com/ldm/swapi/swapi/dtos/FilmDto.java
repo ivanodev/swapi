@@ -1,11 +1,9 @@
 package com.ldm.swapi.swapi.dtos;
 
-import com.ldm.swapi.infra.apiconsumer.SWEntity;
+import com.ldm.swapi.apiconsumer.SWEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter

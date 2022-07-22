@@ -12,8 +12,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.BeanUtils;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.UUID;
-
 @RunWith(SpringRunner.class)
 @DisplayName("User creation service test.")
 public class CreateUserServiceTest {
@@ -28,7 +26,7 @@ public class CreateUserServiceTest {
     public void setup() {
 
         userDto = new UserDto();
-        userDto.setId(UUID.fromString("ccd29b42-338b-4962-9c91-50cae128dfc6"));
+        userDto.setId(10L);
         userDto.setFirstName("Luis");
         userDto.setLastName("Silva");
         userDto.setPassword("Ldm##2022");
@@ -38,7 +36,7 @@ public class CreateUserServiceTest {
         user = new User();
         BeanUtils.copyProperties(userDto, user);
 
-        userRepository  = Mockito.mock(UserRepository.class);
+        userRepository = Mockito.mock(UserRepository.class);
         createUserService = new CreateUserServiceImpl(userRepository);
     }
 
@@ -49,10 +47,10 @@ public class CreateUserServiceTest {
         Mockito.when(userRepository.existsByLogin(user.getLogin())).thenReturn(false);
         Mockito.when(userRepository.save(Mockito.any())).thenReturn(user);
 
-        UUID userId = this.createUserService.execute(userDto);
+        Long userId = this.createUserService.execute(userDto);
 
         Assertions.assertNotNull(userId);
-        Assertions.assertEquals(UUID.fromString("ccd29b42-338b-4962-9c91-50cae128dfc6"), user.getId());
+        Assertions.assertEquals(10L, user.getId());
 
         var numberInvocationsMethod = 1;
 
@@ -69,7 +67,7 @@ public class CreateUserServiceTest {
 
         try {
 
-            UUID userId = this.createUserService.execute(userDto);
+            Long userId = this.createUserService.execute(userDto);
         } catch (Exception e) {
 
             Assertions.assertEquals(exceptionMessage, e.getMessage());

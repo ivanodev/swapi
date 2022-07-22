@@ -8,5 +8,6 @@ import java.util.List;
 public interface LoaderPlanetService {
 
     List<PlanetDto> getAll() throws IllegalAccessException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, InstantiationException;
+
     PlanetDto getById(Number planetId) throws NoSuchMethodException, NoSuchFieldException, InstantiationException, IllegalAccessException, InvocationTargetException;
 }

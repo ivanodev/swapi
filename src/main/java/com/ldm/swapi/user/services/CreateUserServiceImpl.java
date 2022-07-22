@@ -5,12 +5,10 @@ import com.ldm.swapi.user.entities.User;
 import com.ldm.swapi.user.repositories.UserRepository;
 import com.ldm.swapi.user.utils.PasswordUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.UUID;
 
 @Component
 public class CreateUserServiceImpl implements CreateUserService {
@@ -22,11 +20,10 @@ public class CreateUserServiceImpl implements CreateUserService {
     }
 
     @Override
-    public UUID execute(UserDto userDto) throws Exception {
+    public Long execute(UserDto userDto) throws Exception {
 
         User user = new User();
         BeanUtils.copyProperties(userDto, user);
-        user.setCreatedAt(LocalDateTime.now(ZoneId.of("UTC")));
 
         boolean userNameExists = this.userRepository.existsByLogin(userDto.getLogin());
 
@@ -36,6 +33,7 @@ public class CreateUserServiceImpl implements CreateUserService {
         }
 
         user.setPassword(PasswordUtils.encrypt(userDto.getPassword()));
+        user.setCreatedAt(LocalDateTime.now(ZoneId.of("UTC")));
 
         User userCreated = this.userRepository.save(user);
         return userCreated.getId();

@@ -1,7 +1,7 @@
 package com.ldm.swapi.config;
 
-import com.ldm.swapi.auth.security.AuthenticateFilter;
-import com.ldm.swapi.auth.security.AuthenticationFilter;
+import com.ldm.swapi.auth.security.EnsureAuthentication;
+import com.ldm.swapi.auth.security.UserAuthentication;
 import com.ldm.swapi.user.services.CreateMasterUserService;
 import com.ldm.swapi.user.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +41,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new AuthenticationFilter(authenticationManager()))
-                .addFilter(new AuthenticateFilter(authenticationManager()))
+                .addFilter(new UserAuthentication(authenticationManager()))
+                .addFilter(new EnsureAuthentication(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable();
     }
-
 
 
     @Override

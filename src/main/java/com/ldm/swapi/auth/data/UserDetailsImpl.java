@@ -26,7 +26,7 @@ public class UserDetailsImpl implements UserDetails {
         String password = "";
 
         if (!ObjectUtils.isEmpty(this.user)) {
-            password =  user.getPassword();
+            password = user.getPassword();
         }
 
         return password;
@@ -37,7 +37,7 @@ public class UserDetailsImpl implements UserDetails {
         String login = "";
 
         if (!ObjectUtils.isEmpty(this.user)) {
-            login =  user.getLogin();
+            login = user.getLogin();
         }
 
         return login;
@@ -63,7 +63,7 @@ public class UserDetailsImpl implements UserDetails {
         Boolean isActive = false;
 
         if (!ObjectUtils.isEmpty(this.user)) {
-            isActive =  user.getIsActive();
+            isActive = user.getIsActive();
         }
 
         return isActive;

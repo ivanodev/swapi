@@ -1,9 +1,9 @@
 package com.ldm.swapi.swapi.dataprovider;
 
-import com.ldm.swapi.infra.apiconsumer.DataType;
-import com.ldm.swapi.infra.apiconsumer.LDMApiConsumerImpl;
-import com.ldm.swapi.infra.apiconsumer.ParseSpecField;
-import com.ldm.swapi.infra.apiconsumer.SWEntity;
+import com.ldm.swapi.apiconsumer.DataType;
+import com.ldm.swapi.apiconsumer.LDMApiConsumerImpl;
+import com.ldm.swapi.apiconsumer.ParseSpecField;
+import com.ldm.swapi.apiconsumer.SWEntity;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Field;

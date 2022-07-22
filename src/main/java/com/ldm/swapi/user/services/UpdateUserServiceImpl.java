@@ -9,7 +9,6 @@ import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.UUID;
 
 @Component
 public class UpdateUserServiceImpl implements UpdateUserService {
@@ -22,7 +21,7 @@ public class UpdateUserServiceImpl implements UpdateUserService {
     }
 
     @Override
-    public UUID execute(UserDto userDto) throws Exception {
+    public Long execute(UserDto userDto) throws Exception {
 
         User userFound = this.userRepository.findByLogin(userDto.getLogin());
 
@@ -31,7 +30,7 @@ public class UpdateUserServiceImpl implements UpdateUserService {
             throw new Exception("Conflict: User cannot exists!");
         }
 
-        if ( userDto.getId() != userFound.getId()) {
+        if (userDto.getId() != userFound.getId()) {
 
             throw new Exception("Conflict: User name already exists for another user!");
         }

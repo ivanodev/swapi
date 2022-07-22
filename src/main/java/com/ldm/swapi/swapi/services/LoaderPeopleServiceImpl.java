@@ -1,8 +1,8 @@
 package com.ldm.swapi.swapi.services;
 
-import com.ldm.swapi.infra.apiconsumer.DataType;
-import com.ldm.swapi.infra.apiconsumer.ParseSpecField;
-import com.ldm.swapi.infra.apiconsumer.SWEntity;
+import com.ldm.swapi.apiconsumer.DataType;
+import com.ldm.swapi.apiconsumer.ParseSpecField;
+import com.ldm.swapi.apiconsumer.SWEntity;
 import com.ldm.swapi.swapi.dataprovider.SWApiService;
 import com.ldm.swapi.swapi.dtos.PeopleDto;
 import org.springframework.stereotype.Component;
@@ -54,7 +54,7 @@ public class LoaderPeopleServiceImpl implements LoaderPeopleService {
         List<PeopleDto> peoples = new ArrayList<PeopleDto>();
 
         resultList.stream().forEach(item ->
-               peoples.add((PeopleDto)item)
+                peoples.add((PeopleDto) item)
         );
 
         return peoples;

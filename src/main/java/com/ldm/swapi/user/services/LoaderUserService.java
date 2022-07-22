@@ -6,11 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public interface LoaderUserService {
 
     Page<User> getAll(Pageable pageable);
-    Optional<User> getById(UUID userId);
+
+    Optional<User> getById(Long userId);
 }

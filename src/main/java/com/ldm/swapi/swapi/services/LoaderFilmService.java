@@ -10,5 +10,6 @@ import java.util.List;
 public interface LoaderFilmService {
 
     List<FilmDto> getAll() throws IllegalAccessException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, InstantiationException;
+
     FilmDto getById(Number filmId) throws NoSuchMethodException, NoSuchFieldException, InstantiationException, IllegalAccessException, InvocationTargetException;
 }

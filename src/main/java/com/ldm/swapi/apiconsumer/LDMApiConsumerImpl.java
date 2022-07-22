@@ -1,4 +1,4 @@
-package com.ldm.swapi.infra.apiconsumer;
+package com.ldm.swapi.apiconsumer;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-public class LDMApiConsumerImpl implements LDMApiConsumer  {
+public class LDMApiConsumerImpl implements LDMApiConsumer {
 
     private WebClient webClient;
 
@@ -36,14 +36,4 @@ public class LDMApiConsumerImpl implements LDMApiConsumer  {
                 .bodyToMono(Object.class)
                 .block();
     }
-
-//    @Override
-//    @Bean
-//    public WebClient webClient(WebClient.Builder builder) {
-//
-//        return builder
-//                .baseUrl("https://swapi.dev/api")
-//                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-//                .build();
-//    }
 }

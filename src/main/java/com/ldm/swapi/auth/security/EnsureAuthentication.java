@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class AuthenticateFilter extends BasicAuthenticationFilter {
+public class EnsureAuthentication extends BasicAuthenticationFilter {
 
     public static final String HEADER_ATTRIB = "Authorization";
     public static final String PREFIX_ATTRIB = "Bearer ";
 
-    public AuthenticateFilter(AuthenticationManager authenticationManager) {
+    public EnsureAuthentication(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
@@ -31,7 +31,7 @@ public class AuthenticateFilter extends BasicAuthenticationFilter {
 
         String headerAttrib = request.getHeader(HEADER_ATTRIB);
 
-        if(headerAttrib == null) {
+        if (headerAttrib == null) {
             chain.doFilter(request, response);
             return;
         }
@@ -51,7 +51,7 @@ public class AuthenticateFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken(String token) {
 
-        String user = JWT.require(Algorithm.HMAC512(AuthenticationFilter.SECRET))
+        String user = JWT.require(Algorithm.HMAC512(UserAuthentication.SECRET))
                 .build()
                 .verify(token)
                 .getSubject();
@@ -61,8 +61,5 @@ public class AuthenticateFilter extends BasicAuthenticationFilter {
         }
 
         return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-
-
-
     }
 }

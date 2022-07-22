@@ -38,5 +38,7 @@ public class UserServiceFactoryImpl implements UserServiceFactory {
     }
 
     @Override
-    public LoaderUserService createLoaderUserService() { return this.loaderUserService; }
+    public LoaderUserService createLoaderUserService() {
+        return this.loaderUserService;
+    }
 }

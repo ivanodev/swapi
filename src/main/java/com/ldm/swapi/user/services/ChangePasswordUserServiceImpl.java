@@ -1,9 +1,14 @@
 package com.ldm.swapi.user.services;
 
 import com.ldm.swapi.user.dtos.ChangePasswordDto;
+import com.ldm.swapi.user.entities.User;
 import com.ldm.swapi.user.repositories.UserRepository;
 import com.ldm.swapi.user.utils.PasswordUtils;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Optional;
 
 @Component
 public class ChangePasswordUserServiceImpl implements ChangePasswordUserService {
@@ -18,14 +23,23 @@ public class ChangePasswordUserServiceImpl implements ChangePasswordUserService 
     @Override
     public void execute(ChangePasswordDto changePasswordDto) throws Exception {
 
-        boolean userExists = this.userRepository.existsById(changePasswordDto.getUserId());
+        Optional<User> userOptional = this.userRepository.findById(changePasswordDto.getUserId());
 
-        if (!userExists) {
+        if (userOptional.isEmpty()) {
 
             throw new Exception("Conflict: User cannot exists!");
         }
 
+//        boolean userExists = this.userRepository.existsById(changePasswordDto.getUserId());
+//        if (!userExists) {
+//            throw new Exception("Conflict: User cannot exists!");
+//        }
+
         String password = PasswordUtils.encrypt(changePasswordDto.getPassword());
-        this.userRepository.updatePassword(changePasswordDto.getUserId(), password);
+        User user = userOptional.get();
+        user.setPassword(password);
+        user.setUpdatedAt(LocalDateTime.now(ZoneId.of("UTC")));
+        this.userRepository.save(user);
+//        this.userRepository.updatePassword(changePasswordDto.getUserId(), password);
     }
 }

@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -35,7 +34,7 @@ public class UserController {
 
         try {
 
-            UUID userId = createUserService.execute(userDto);
+            Long userId = createUserService.execute(userDto);
             result = ResponseEntity.status(HttpStatus.CREATED).body(userId);
         } catch (Exception e) {
 
@@ -53,7 +52,7 @@ public class UserController {
 
         try {
 
-            UUID userId = updateUserService.execute(userDto);
+            Long userId = updateUserService.execute(userDto);
             result = ResponseEntity.status(HttpStatus.OK).body(userId);
         } catch (Exception e) {
 
@@ -64,16 +63,21 @@ public class UserController {
     }
 
     @PatchMapping
-    public void changePassword(@RequestBody ChangePasswordDto changePasswordDto) throws Exception {
+    public ResponseEntity<Object> changePassword(@RequestBody ChangePasswordDto changePasswordDto) throws Exception {
+
+        ResponseEntity<Object> result;
 
         try {
 
             ChangePasswordUserService changePasswordUserService = this.userServiceFactory.createChangePasswordUserService();
             changePasswordUserService.execute(changePasswordDto);
+            result = ResponseEntity.status(HttpStatus.OK).body(changePasswordDto.getUserId());
         } catch (Exception e) {
 
-            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            result = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
+
+        return result;
     }
 
     @GetMapping
@@ -95,7 +99,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<Object> getById(@PathVariable(value = "userId") UUID userId) {
+    public ResponseEntity<Object> getById(@PathVariable(value = "userId") Long userId) {
 
         Optional<User> userOptional;
 

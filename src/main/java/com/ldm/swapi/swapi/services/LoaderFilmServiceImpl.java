@@ -1,8 +1,8 @@
 package com.ldm.swapi.swapi.services;
 
-import com.ldm.swapi.infra.apiconsumer.DataType;
-import com.ldm.swapi.infra.apiconsumer.ParseSpecField;
-import com.ldm.swapi.infra.apiconsumer.SWEntity;
+import com.ldm.swapi.apiconsumer.DataType;
+import com.ldm.swapi.apiconsumer.ParseSpecField;
+import com.ldm.swapi.apiconsumer.SWEntity;
 import com.ldm.swapi.swapi.dataprovider.SWApiService;
 import com.ldm.swapi.swapi.dtos.FilmDto;
 import org.springframework.stereotype.Component;
@@ -52,7 +52,7 @@ public class LoaderFilmServiceImpl implements LoaderFilmService {
         List<FilmDto> films = new ArrayList<FilmDto>();
 
         resultList.stream().forEach(item ->
-               films.add((FilmDto)item)
+                films.add((FilmDto) item)
         );
 
         return films;
