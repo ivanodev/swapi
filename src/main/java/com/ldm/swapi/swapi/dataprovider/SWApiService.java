@@ -65,7 +65,7 @@ public class SWApiService {
 
     public SWEntity getOneSync(
             String uri, Class elementClass, List<ParseSpecField> parseSpecFields)
-            throws InvocationTargetException, NoSuchMethodException, NoSuchFieldException, InstantiationException, IllegalAccessException {
+            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException {
 
         Object data = ldmApiConsumer.getDataSync(uri);
         LinkedHashMap lhmFilmResult = (LinkedHashMap) data;
@@ -81,7 +81,13 @@ public class SWApiService {
                 String newName = psf.getTargetField();
                 DataType dataType = psf.getDataType();
 
-                Field field = swEntity.getClass().getDeclaredField(newName);
+                Field field = null;
+
+                try {
+                    field = swEntity.getClass().getDeclaredField(newName);
+                } catch (NoSuchFieldException e) {
+                    field = swEntity.getClass().getSuperclass().getDeclaredField(newName);
+                }
 
                 if (!ObjectUtils.isEmpty(field)) {
                     field.setAccessible(true);
@@ -89,7 +95,7 @@ public class SWApiService {
                 }
             }
 
-        } catch (IllegalAccessException | NoSuchFieldException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException | NoSuchFieldException e) {
 
             throw e;
         }

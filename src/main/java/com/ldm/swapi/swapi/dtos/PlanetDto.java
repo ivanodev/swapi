@@ -21,7 +21,4 @@ public class PlanetDto extends SWEntity {
     private String aguaSuperficie;
     private List<String> moradores;
     private List<String> filmes;
-    private String url;
-    private String criado;
-    private String editado;
 }

@@ -21,7 +21,4 @@ public class FilmDto extends SWEntity {
     private List<String> especies;
     private List<String> veiculos;
     private List<String> navesEstelares;
-    private String criado;
-    private String editado;
-    private String url;
 }

@@ -23,7 +23,4 @@ public class PeopleDto extends SWEntity {
     private List<String> especies;
     private List<String> navesEstelares;
     private List<String> veiculos;
-    private String url;
-    private String criado;
-    private String editado;
 }
