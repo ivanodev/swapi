@@ -44,7 +44,13 @@ public class SWApiService {
                     String newName = psf.getTargetField();
                     DataType dataType = psf.getDataType();
 
-                    Field field = swEntity.getClass().getDeclaredField(newName);
+                    Field field = null;
+
+                    try {
+                        field = swEntity.getClass().getDeclaredField(newName);
+                    } catch (NoSuchFieldException e) {
+                        field = swEntity.getClass().getSuperclass().getDeclaredField(newName);
+                    }
 
                     if (!ObjectUtils.isEmpty(field)) {
                         field.setAccessible(true);
